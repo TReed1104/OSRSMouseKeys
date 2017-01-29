@@ -43,6 +43,16 @@ void SetEnhancePointerPrecisionState(bool isON)
 	// Get the current setup of the mouses acceleration, then turn off enhance pointer precision as this messes up the key jumps.
 	int mouseParams[3];
 	SystemParametersInfo(SPI_GETMOUSE, 0, mouseParams, 0);
+	if (isON)
+	{
+		mouseParams[0] = 6;
+		mouseParams[1] = 10;
+	}
+	else
+	{
+		mouseParams[0] = 0;
+		mouseParams[1] = 0;
+	}
 	mouseParams[2] = isON;	// This sets the enhance pointer precision setting to off.
 	SystemParametersInfo(SPI_SETMOUSE, 0, mouseParams, 0);
 }
@@ -74,33 +84,44 @@ int main()
 		<< "Mode 0 - MouseKeys Off\n" 
 		<< "Mode 1 - Drop Mode (Moves to menu option 2)\n" 
 		<< "Mode 2 - Bank 'x' Mode (Moves to menu option 4)\n"
+		<< "Mode 9 - Exit the program\n"
 		<< "\n"
 		<< "Please Input your choice:" 
 		<< std::endl;
 
-	// Get the users input.
-	int mode = 0;
-	std::cin >> mode;
+	bool isRunning = true;
 
-	if (mode == 0) {
-		// Bank Mode.
-		SetMouseSpeed(10);
-		SetEnhancePointerPrecisionState(true);
-		SetMouseKeySettings(0, 184, 3000);
-		std::cout << "MouseKeys have been turned off and the mouse settings have been reset." << std::endl;
-	}
-	else if (mode == 1) {
-		// Drop Mode.
-		SetMouseSpeed(10);
-		SetEnhancePointerPrecisionState(false);
-		SetMouseKeySettings((MKF_MOUSEKEYSON | MKF_INDICATOR | MKF_LEFTBUTTONSEL | MKF_MODIFIERS | MKF_REPLACENUMBERS), 184, 3000);
-		std::cout << "MouseKey Mode has been set to Drop mode." << std::endl;
-	}
-	else if (mode == 2) {
-		// Bank (x) Mode.
-		SetMouseSpeed(10);
-		SetEnhancePointerPrecisionState(false);
-		SetMouseKeySettings((MKF_MOUSEKEYSON | MKF_INDICATOR | MKF_LEFTBUTTONSEL | MKF_MODIFIERS | MKF_REPLACENUMBERS), 358, 3000);
-		std::cout << "MouseKey Mode has been set to Bank 'x' mode." << std::endl;
+	while (isRunning)
+	{
+		// Get the users input.
+		int mode = 0;
+		std::cin >> mode;
+
+
+		if (mode == 0) {
+			// Bank Mode.
+			SetMouseSpeed(10);
+			SetEnhancePointerPrecisionState(true);
+			SetMouseKeySettings(0, 184, 3000);
+			std::cout << "MouseKeys have been turned off and the mouse settings have been reset." << std::endl;
+		}
+		else if (mode == 1) {
+			// Drop Mode.
+			SetMouseSpeed(10);
+			SetEnhancePointerPrecisionState(false);
+			SetMouseKeySettings((MKF_MOUSEKEYSON | MKF_INDICATOR | MKF_LEFTBUTTONSEL | MKF_MODIFIERS | MKF_REPLACENUMBERS), 184, 3000);
+			std::cout << "MouseKey Mode has been set to Drop mode." << std::endl;
+		}
+		else if (mode == 2) {
+			// Bank (x) Mode.
+			SetMouseSpeed(10);
+			SetEnhancePointerPrecisionState(false);
+			SetMouseKeySettings((MKF_MOUSEKEYSON | MKF_INDICATOR | MKF_LEFTBUTTONSEL | MKF_MODIFIERS | MKF_REPLACENUMBERS), 358, 3000);
+			std::cout << "MouseKey Mode has been set to Bank 'x' mode." << std::endl;
+		}
+		else if (mode == 9)
+		{
+			isRunning = false;
+		}
 	}
 }
