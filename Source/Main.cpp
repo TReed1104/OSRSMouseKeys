@@ -4,8 +4,7 @@
 #include <string>
 
 // Get functions
-int GetMouseSpeed()
-{
+int GetMouseSpeed() {
 	// Creates an int to hold the data passed back by the Windows SPI API.
 	int mouseSpeed = -1;
 
@@ -13,8 +12,7 @@ int GetMouseSpeed()
 	SystemParametersInfo(SPI_SETMOUSESPEED, 0, &mouseSpeed, 0);
 	return mouseSpeed;
 }
-void GetMouseSettings(const int inputArray[])
-{
+void GetMouseSettings(const int inputArray[]) {
 	// Creates an array to hold the data passed back by the Windows SPI API.
 	int mouseParams[3];
 
@@ -22,8 +20,7 @@ void GetMouseSettings(const int inputArray[])
 	SystemParametersInfo(SPI_GETMOUSE, 0, mouseParams, 0);
 	inputArray = mouseParams;
 }
-MOUSEKEYS GetMouseKeySettings()
-{
+MOUSEKEYS GetMouseKeySettings() {
 	// Creates an appropriate struct to hold the data passed back by the Windows SPI API.
 	MOUSEKEYS currentSettings;
 	currentSettings.cbSize = sizeof(MOUSEKEYS);
@@ -34,8 +31,7 @@ MOUSEKEYS GetMouseKeySettings()
 	SystemParametersInfo(SPI_GETMOUSEKEYS, sizeof(MOUSEKEYS), &currentSettings, 0);
 	return currentSettings;
 }
-STICKYKEYS GetStickyKeySettings()
-{
+STICKYKEYS GetStickyKeySettings() {
 	// Creates an appropriate struct to hold the data passed back by the Windows SPI API.
 	STICKYKEYS currentSettings;
 	currentSettings.cbSize = sizeof(STICKYKEYS);
@@ -46,13 +42,11 @@ STICKYKEYS GetStickyKeySettings()
 }
 
 // Set functions
-void SetMouseSpeed(const int &newMouseSpeed)
-{
+void SetMouseSpeed(const int &newMouseSpeed) {
 	// Passes the new value to the Windows SPI API, applying the changes.
 	SystemParametersInfo(SPI_SETMOUSESPEED, 0, (LPVOID)newMouseSpeed, SPIF_SENDCHANGE | SPIF_UPDATEINIFILE);
 }
-void SetMouseSettings(const int &mouseThresholdX, const int &mouseThresholdY, const bool &enablePointerPrecisionState)
-{
+void SetMouseSettings(const int &mouseThresholdX, const int &mouseThresholdY, const bool &enablePointerPrecisionState) {
 	// Creates and fills an array with the new settings.
 	int mouseParams[3];
 	mouseParams[0] = mouseThresholdX;
@@ -62,8 +56,7 @@ void SetMouseSettings(const int &mouseThresholdX, const int &mouseThresholdY, co
 	// Passes the array to the Windows SPI API, applying the changes.
 	SystemParametersInfo(SPI_SETMOUSE, 0, mouseParams, SPIF_SENDCHANGE | SPIF_UPDATEINIFILE);
 }
-void SetMouseKeySettings(const DWORD &flags, const DWORD &topSpeed, const DWORD &acceleration)
-{
+void SetMouseKeySettings(const DWORD &flags, const DWORD &topSpeed, const DWORD &acceleration) {
 	// Creates and fills an appropriate struct with the new settings.
 	MOUSEKEYS newSettings;
 	newSettings.cbSize = sizeof(MOUSEKEYS);
@@ -77,8 +70,7 @@ void SetMouseKeySettings(const DWORD &flags, const DWORD &topSpeed, const DWORD 
 	// Passes the struct to the Windows SPI API, applying the changes.
 	SystemParametersInfo(SPI_SETMOUSEKEYS, sizeof(MOUSEKEYS), (LPVOID)&newSettings, SPIF_SENDCHANGE | SPIF_UPDATEINIFILE);
 }
-void SetStickKeySettings(const DWORD &flags)
-{
+void SetStickKeySettings(const DWORD &flags) {
 	// Creates and fills an appropriate struct with the new settings.
 	STICKYKEYS newSettings;
 	newSettings.cbSize = sizeof(STICKYKEYS);
@@ -89,27 +81,32 @@ void SetStickKeySettings(const DWORD &flags)
 }
 
 // Program Main
-int main()
-{
+int main() {
 	// Draw the UI.
 	std::cout
 		<< "----------------------------------------------------------------------------------------\n"
-		<< "Welcome to Teebu's MouseKey Setup\n"
+		<< "Welcome to Teebu's Windows Mouse Key client,\n"
+		<< "A small program for quickly setting up Windows Mouse Keys.\n"
 		<< "----------------------------------------------------------------------------------------\n"
+		<< "How it works:\n"
+		<< "The program works by directly changing your Windows Mouse Key and Sticky Key settings\n"
+		<< "through the use of the Windows built-in API, because of this the changes are applied\n"
+		<< "system wide and not to the OSRS client directly.\n"
+		<< "----------------------------------------------------------------------------------------\n"
+		<< "WARNING:\n"
 		<< "This program is open-source and comes with absolutely no warranty, the user takes full\n"
-		<< "responsibility for any actions and issues encountered.\n"
+		<< "responsibility for any issues caused by the program.\n"
+		<< "The program is not endorsed by Jagex in any way and is entirely third party.\n"
 		<< "----------------------------------------------------------------------------------------\n"
 		<< "Please enter the Mousekey mode you wish to use:\n"
 		<< "Command >> 'reset'		>> Disables MouseKeys.\n"
 		<< "Command >> 'drop'		>> Drop mode, without Sticky Keys.\n"
 		<< "Command >> 'bank'		>> Bank 'x' mode, without Sticky Keys.\n"
-		<< "Command >> 'drop sticky'	>> Drop mode, with Sticky Keys.\n"
-		<< "Command >> 'bank sticky'	>> Bank 'x' mode, with Sticky Keys.\n"
+		<< "Command >> 'drop sticky'	>> Drop mode, with Sticky Keys (see note).\n"
+		<< "Command >> 'bank sticky'	>> Bank 'x' mode, with Sticky Keys (see note).\n"
 		<< "Command >> 'exit'		>> Close the program.\n"
-		<< "\n"
-		<< "**Please note that sticky key modes still require you to double tap Ctrl like normal.\n"
-		<< "\n"
-		<< "----------------------------------------------------------------------------------------\n"
+		<< "Note - Sticky Key modes still require the double tap of Ctrl to toggle the key lock.\n"
+		<< "----------------------------------------------------------------------------------------"
 		<< std::endl;
 
 	bool isProgramRunning = true; // Controls the main program loop.
