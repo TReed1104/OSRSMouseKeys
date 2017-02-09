@@ -80,35 +80,43 @@ void SetStickKeySettings(const DWORD &flags) {
 	SystemParametersInfo(SPI_SETSTICKYKEYS, sizeof(STICKYKEYS), (LPVOID)&newSettings, SPIF_SENDCHANGE | SPIF_UPDATEINIFILE);
 }
 
-// Program Main
-int main() {
+// Console outputs
+void PrintDisclaimers() {
+	std::cout
+		<< "Teebu's Mouse Key control panel\n"
+		<< "A client for the quick setup of your Operating Systems Mouse Keys.\n\n"
+
+		<< "DISCLAIMER:\n"
+		<< "This project is an Open-Source client for the quick and easy toggling between the different\n"
+		<< "mouse key modes commonly used for Old School Runescape.\n"
+		<< "This program sets the Operating system's mouse key settings directly and therefore does not\n"
+		<< "break the rules set out by Jagex.\n"
+		<< std::endl;
+}
+void PrintCommands() {
 	// Draw the UI.
 	std::cout
-		<< "----------------------------------------------------------------------------------------\n"
-		<< "Welcome to Teebu's Windows Mouse Key client,\n"
-		<< "A small program for quickly setting up Windows Mouse Keys.\n"
-		<< "----------------------------------------------------------------------------------------\n"
-		<< "How it works:\n"
-		<< "The program works by directly changing your Windows Mouse Key and Sticky Key settings\n"
-		<< "through the use of the Windows built-in API, because of this the changes are applied\n"
-		<< "system wide and not to the OSRS client directly.\n"
-		<< "----------------------------------------------------------------------------------------\n"
-		<< "WARNING:\n"
-		<< "This program is open-source and comes with absolutely no warranty, the user takes full\n"
-		<< "responsibility for any issues caused by the program.\n"
-		<< "The program is not endorsed by Jagex in any way and is entirely third party.\n"
-		<< "----------------------------------------------------------------------------------------\n"
-		<< "Please enter the Mousekey mode you wish to use:\n"
-		<< "Command >> 'reset'		>> Disables MouseKeys.\n"
-		<< "Command >> 'drop'		>> Drop mode, without Sticky Keys.\n"
-		<< "Command >> 'bank'		>> Bank 'x' mode, without Sticky Keys.\n"
-		<< "Command >> 'drop sticky'	>> Drop mode, with Sticky Keys (see note).\n"
-		<< "Command >> 'bank sticky'	>> Bank 'x' mode, with Sticky Keys (see note).\n"
-		<< "Command >> 'exit'		>> Close the program.\n"
-		<< "Note - Sticky Key modes still require the double tap of Ctrl to toggle the key lock.\n"
-		<< "----------------------------------------------------------------------------------------"
+		<< "COMMANDS:\n"
+		<< "Command >> '0' or 'reset'		>> Disables MouseKeys.\n"
+		<< "Command >> '1' or 'drop'		>> Drop mode, without Sticky Keys.\n"
+		<< "Command >> '2' or 'drop sticky'		>> Drop mode, with Sticky Keys (see FAQ).\n"
+		<< "Command >> '3' or 'bank'		>> Bank 'x' mode, without Sticky Keys.\n"
+		<< "Command >> '4' or 'bank sticky'		>> Bank 'x' mode, with Sticky Keys (see FAQ).\n"
+		<< "Command >> 'clear'			>> Clear command line.\n"
+		<< "Command >> 'manual'			>> Prints the command list.\n"
+		<< "Command >> 'faq'			>> Prints the FAQ.\n"
+		<< "Command >> 'exit'			>> Close the program.\n"
 		<< std::endl;
+}
+void PrintFAQ() {
+	std::cout << "NOT YET IMPLEMENTED\n" << std::endl;
+}
 
+// Program Main
+int main() {
+	PrintDisclaimers();
+	PrintCommands();
+	
 	bool isProgramRunning = true; // Controls the main program loop.
 	while (isProgramRunning)
 	{
@@ -122,7 +130,21 @@ int main() {
 			std::cout << "Exit of the program initialised, clearing up and closing.\n" << std::endl;
 			isProgramRunning = false;
 		}
-		else if (enteredCommand == "reset") {
+		else if (enteredCommand == "clear")
+		{
+			system("cls");	// BAD PRACTICE, LOOKING FOR AN ALTERNATIVE.
+			PrintCommands();
+		}
+		else if (enteredCommand == "manual")
+		{
+			std::cout << "\n" << std::endl;
+			PrintCommands();
+		}
+		else if (enteredCommand == "faq")
+		{
+			PrintFAQ();
+		}
+		else if (enteredCommand == "reset" || enteredCommand == "0") {
 			// Reset the system settings to a base mode, this currently is hardcoded to use the developer's defaults. This will be changed and expanded later to allow users to save/load their own settings.
 			SetMouseSpeed(10);
 			SetMouseSettings(6, 10, true);		// Reactivates Enhanced Pointer Precision with the threshold values which normally get set my the OS, the SPI function doesn't automatically set these values on the activation of the setting.
@@ -130,7 +152,7 @@ int main() {
 			SetStickKeySettings(0);
 			std::cout << "MouseKeys have been turned off and the mouse settings have been reset.\n" << std::endl;
 		}
-		else if (enteredCommand == "drop") {
+		else if (enteredCommand == "drop" || enteredCommand == "1") {
 			// Drop Mode.
 			SetMouseSpeed(10);
 			SetMouseSettings(0, 0, false);
@@ -138,15 +160,7 @@ int main() {
 			SetStickKeySettings(0);
 			std::cout << "MouseKey Mode has been set to Drop mode.\n" << std::endl;
 		}
-		else if (enteredCommand == "bank") {
-			// Bank (x) Mode.
-			SetMouseSpeed(10);
-			SetMouseSettings(0, 0, false);
-			SetMouseKeySettings((MKF_AVAILABLE | MKF_MOUSEKEYSON | MKF_INDICATOR | MKF_LEFTBUTTONSEL | MKF_MODIFIERS | MKF_REPLACENUMBERS), 358, 3000);
-			SetStickKeySettings(0);
-			std::cout << "MouseKey Mode has been set to Bank 'x' mode.\n" << std::endl;
-		}
-		else if (enteredCommand == "drop sticky") {
+		else if (enteredCommand == "drop sticky" || enteredCommand == "2") {
 			// Drop Mode, with Stick Key support.
 			SetMouseSpeed(10);
 			SetMouseSettings(0, 0, false);
@@ -154,7 +168,15 @@ int main() {
 			SetStickKeySettings((SKF_AUDIBLEFEEDBACK | SKF_AVAILABLE | SKF_STICKYKEYSON | SKF_INDICATOR | SKF_TRISTATE));
 			std::cout << "MouseKey Mode has been set to Drop mode, using Sticky Keys.\n" << std::endl;
 		}
-		else if (enteredCommand == "bank sticky") {
+		else if (enteredCommand == "bank" || enteredCommand == "3") {
+			// Bank (x) Mode.
+			SetMouseSpeed(10);
+			SetMouseSettings(0, 0, false);
+			SetMouseKeySettings((MKF_AVAILABLE | MKF_MOUSEKEYSON | MKF_INDICATOR | MKF_LEFTBUTTONSEL | MKF_MODIFIERS | MKF_REPLACENUMBERS), 358, 3000);
+			SetStickKeySettings(0);
+			std::cout << "MouseKey Mode has been set to Bank 'x' mode.\n" << std::endl;
+		}
+		else if (enteredCommand == "bank sticky" || enteredCommand == "4") {
 			// Bank (x) Mode, with Stick Key support.
 			SetMouseSpeed(10);
 			SetMouseSettings(0, 0, false);
