@@ -8,13 +8,22 @@
 
 class MouseKeysHandler {
 public:
+	// Default values, these are set on program load
+	int defaultJumpSpeed;
+	int defaultFlags;
+
+	// Constructors
 	MouseKeysHandler();
 	~MouseKeysHandler();
 
-	MOUSEKEYS GetSettings(void);
-	void SetSettings(const DWORD& flags, const DWORD& topSpeed, const DWORD& acceleration);
+	// Functions
+	void LoadDefaults(void);
+	void GetJumpSpeed(const int& outputFlags, const int& outputJumpSpeed);
+	void SetMouseKeys(const int& flags, const int& jumpSpeed);
 
 private:
+	// Functions
+	void SaveDefaults(void);
 
 };
 

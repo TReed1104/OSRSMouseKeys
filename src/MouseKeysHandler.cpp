@@ -1,14 +1,20 @@
 #include "MouseKeysHandler.h"
 
 MouseKeysHandler::MouseKeysHandler() {
-
+	this->SaveDefaults();
 }
-
 MouseKeysHandler::~MouseKeysHandler() {
-
+	std::cout << "Reloading the Users Default Mouse Key Settings" << std::endl;
+	this->LoadDefaults();
 }
 
-MOUSEKEYS MouseKeysHandler::GetSettings(void) {
+void MouseKeysHandler::SaveDefaults(void) {
+	this->GetJumpSpeed(defaultFlags, defaultJumpSpeed);
+}
+void MouseKeysHandler::LoadDefaults(void) {
+	this->SetMouseKeys(defaultFlags, defaultJumpSpeed);
+}
+void MouseKeysHandler::GetJumpSpeed(const int& outputFlags, const int& outputJumpSpeed) {
 	// Creates an appropriate struct to hold the data passed back by the Windows SPI API.
 	MOUSEKEYS currentSettings;
 	currentSettings.cbSize = sizeof(MOUSEKEYS);
@@ -17,15 +23,18 @@ MOUSEKEYS MouseKeysHandler::GetSettings(void) {
 
 	// Passes the struct to the API, which then fills the struct with the appropriate current data.
 	SystemParametersInfo(SPI_GETMOUSEKEYS, sizeof(MOUSEKEYS), &currentSettings, 0);
-	return currentSettings;
+
+	// Set the output
+	defaultFlags = currentSettings.dwFlags;
+	defaultJumpSpeed = currentSettings.iMaxSpeed;
 }
-void MouseKeysHandler::SetSettings(const DWORD & flags, const DWORD & topSpeed, const DWORD & acceleration) {
+void MouseKeysHandler::SetMouseKeys(const int& flags, const int& jumpSpeed) {
 	// Creates and fills an appropriate struct with the new settings.
 	MOUSEKEYS newSettings;
 	newSettings.cbSize = sizeof(MOUSEKEYS);
-	newSettings.dwFlags = flags;
-	newSettings.iMaxSpeed = topSpeed;
-	newSettings.iTimeToMaxSpeed = acceleration;
+	newSettings.dwFlags = (DWORD)flags;
+	newSettings.iMaxSpeed = (DWORD)jumpSpeed;
+	newSettings.iTimeToMaxSpeed = (DWORD)3000;
 	newSettings.iCtrlSpeed = 0;
 	newSettings.dwReserved1 = 0;
 	newSettings.dwReserved2 = 0;

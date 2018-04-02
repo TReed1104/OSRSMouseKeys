@@ -8,16 +8,24 @@
 
 class MouseHandler {
 public:
+	// Default values, these are set on program load
+	int defaultSpeed;
+	int defaultMouseAcceleration[3] = { 6, 10, true };
+
+	// Constructors
 	MouseHandler();
 	~MouseHandler();
 
+	// Functions
+	void LoadDefaults(void);
 	int GetMousespeed(void);
 	void SetMousespeed(const int& newSpeed);
-
-	void GetMouseSettings(const int inputArray[]);
-	void SetMouseSettings(const int& mouseThresholdX, const int& mouseThresholdY, const bool& enablePointerPrecisionState);
+	void GetMouseAcceleration(const int outputArray[]);
+	void SetMouseAcceleration(const int& mouseThresholdX, const int& mouseThresholdY, const int& enablePointerPrecisionState);
 
 private:
+	// Functions
+	void SaveDefaults(void);
 
 };
 

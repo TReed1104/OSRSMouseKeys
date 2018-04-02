@@ -8,13 +8,21 @@
 
 class StickyKeysHandler {
 public:
+	// Default values, these are set on program load
+	int defaultStickKeyFlags;
+
+	// Constructors
 	StickyKeysHandler();
 	~StickyKeysHandler();
 
+	// Functions
+	void LoadDefaults(void);
 	STICKYKEYS GetSettings();
-	void SetSettings(const DWORD &flags);
+	void SetSettings(const int& flags);
 
 private:
+	// Functions
+	void SaveDefaults(void);
 
 };
 
