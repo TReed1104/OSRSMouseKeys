@@ -4,7 +4,6 @@ StickyKeysHandler::StickyKeysHandler() {
 	this->SaveDefaults();
 }
 StickyKeysHandler::~StickyKeysHandler() {
-	std::cout << "Reloading the Users Default Sticky Key Settings" << std::endl;
 	this->LoadDefaults();
 }
 
@@ -12,6 +11,7 @@ void StickyKeysHandler::SaveDefaults(void) {
 	defaultStickKeyFlags = this->GetSettings().dwFlags;
 }
 void StickyKeysHandler::LoadDefaults(void) {
+	std::cout << "Reloading the Users Default Sticky Key Settings" << std::endl;
 	this->SetSettings(defaultStickKeyFlags);
 }
 STICKYKEYS StickyKeysHandler::GetSettings() {
