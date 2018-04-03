@@ -73,7 +73,7 @@ void Program::Run() {
 
 	// Main program loop
 	while (isRunning) {
-		std::cout << "Please Input the mode you wish to activate..." << std::endl;
+		std::cout << "\nPlease Input the mode you wish to activate..." << std::endl;
 		std::string enteredCommand;					// Stores the users command
 		std::getline(std::cin, enteredCommand);		// Get the user entry
 
@@ -91,45 +91,45 @@ void Program::Run() {
 			PrintFAQ();
 		}
 		else if (enteredCommand == "0" || enteredCommand == "reset") {
-			std::cout << "Reloading Default Values.\n" << std::endl;
+			std::cout << "Reloading Default Values." << std::endl;
 			mouseHandler->LoadDefaults();
 			mouseKeyHandler->LoadDefaults();
 			stickyKeyHandler->LoadDefaults();
 		}
 		else if (enteredCommand == "1") {
-			std::cout << "Active Mode - JUMP ONE\n" << std::endl;
+			std::cout << "Active Mode - JUMP ONE" << std::endl;
 			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionOne, 0);
 		}
 		else if (enteredCommand == "2") {
-			std::cout << "Active Mode - JUMP TWO\n" << std::endl;
+			std::cout << "Active Mode - JUMP TWO" << std::endl;
 			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionTwo, 0);
 		}
 		else if (enteredCommand == "3") {
-			std::cout << "Active Mode - JUMP THREE\n" << std::endl;
+			std::cout << "Active Mode - JUMP THREE" << std::endl;
 			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionThree, 0);
 		}
 		else if (enteredCommand == "4") {
-			std::cout << "Active Mode - JUMP FOUR\n" << std::endl;
+			std::cout << "Active Mode - JUMP FOUR" << std::endl;
 			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionFour, 0);
 		}
 		else if (enteredCommand == "1s") {
-			std::cout << "Active Mode - JUMP ONE WITH STICKY KEYS\n" << std::endl;
+			std::cout << "Active Mode - JUMP ONE WITH STICKY KEYS" << std::endl;
 			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionOne, defaultStickyKeyFlags);
 		}
 		else if (enteredCommand == "2s") {
-			std::cout << "Active Mode - JUMP TWO WITH STICKY KEYS\n" << std::endl;
+			std::cout << "Active Mode - JUMP TWO WITH STICKY KEYS" << std::endl;
 			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionTwo, defaultStickyKeyFlags);
 		}
 		else if (enteredCommand == "3s") {
-			std::cout << "Active Mode - JUMP THREE WITH STICKY KEYS\n" << std::endl;
+			std::cout << "Active Mode - JUMP THREE WITH STICKY KEYS" << std::endl;
 			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionThree, defaultStickyKeyFlags);
 		}
 		else if (enteredCommand == "4s") {
-			std::cout << "Active Mode - JUMP FOUR WITH STICKY KEYS\n" << std::endl;
+			std::cout << "Active Mode - JUMP FOUR WITH STICKY KEYS" << std::endl;
 			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionFour, defaultStickyKeyFlags);
 		}
 		else {
-			std::cout << "Unknown input, pease try again.\n" << std::endl;
+			std::cout << "Unknown input, pease try again." << std::endl;
 		}
 	}
 }
