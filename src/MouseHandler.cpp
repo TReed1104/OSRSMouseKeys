@@ -5,7 +5,6 @@ MouseHandler::MouseHandler() {
 }
 
 MouseHandler::~MouseHandler() {
-	std::cout << "Reloading the Users Default Mouse Settings" << std::endl;
 	this->LoadDefaults();
 }
 
@@ -13,6 +12,7 @@ void MouseHandler::SaveDefaults(void) {
 	defaultSpeed = this->GetMousespeed();
 }
 void MouseHandler::LoadDefaults(void) {
+	std::cout << "Reloading the Users Default Mouse Settings" << std::endl;
 	this->SetMousespeed(defaultSpeed);
 	this->SetMouseAcceleration(defaultMouseAcceleration[0], defaultMouseAcceleration[1], defaultMouseAcceleration[2]);
 }
