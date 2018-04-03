@@ -75,6 +75,9 @@ void Program::Run() {
 			system("cls");
 			PrintUI();
 		}
+		else if (enteredCommand == "manual") {
+			PrintUI();
+		}
 		else if (enteredCommand == "0" || enteredCommand == "reset") {
 			std::cout << "Reloading Default Values.\n" << std::endl;
 			mouseHandler->LoadDefaults();
