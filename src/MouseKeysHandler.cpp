@@ -4,7 +4,6 @@ MouseKeysHandler::MouseKeysHandler() {
 	this->SaveDefaults();
 }
 MouseKeysHandler::~MouseKeysHandler() {
-	std::cout << "Reloading the Users Default Mouse Key Settings" << std::endl;
 	this->LoadDefaults();
 }
 
@@ -12,6 +11,7 @@ void MouseKeysHandler::SaveDefaults(void) {
 	this->GetJumpSpeed(defaultFlags, defaultJumpSpeed);
 }
 void MouseKeysHandler::LoadDefaults(void) {
+	std::cout << "Reloading the Users Default Mouse Key Settings" << std::endl;
 	this->SetMouseKeys(defaultFlags, defaultJumpSpeed);
 }
 void MouseKeysHandler::GetJumpSpeed(const int& outputFlags, const int& outputJumpSpeed) {
