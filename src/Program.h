@@ -37,6 +37,7 @@ public:
 	void CleanUp(void);
 	void PrintDisclaimer(void);
 	void PrintUI(void);
+	void PrintFAQ(void);
 
 private:
 

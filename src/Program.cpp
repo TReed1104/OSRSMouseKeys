@@ -52,6 +52,9 @@ void Program::PrintUI(void) {
 		<< "Command >> 'exit'	>> Close the program\n"
 		<< std::endl;
 }
+void Program::PrintFAQ(void) {
+	std::cout << "NOT YET IMPLEMENTED\n" << std::endl;
+}
 void Program::CleanUp(void) {
 	delete mouseHandler;
 	delete mouseKeyHandler;
