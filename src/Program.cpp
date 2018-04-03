@@ -24,7 +24,24 @@ void Program::PrintDisclaimer(void) {
 
 }
 void Program::PrintUI(void) {
-
+	// Draw the UI.
+	std::cout
+		<< "COMMANDS:\n"
+		<< "Command >> '0'		>> Load Defaults saved on program launch\n"
+		<< "Command >> '1'		>> Jump 1 op distance (Use)\n"
+		<< "Command >> '2'		>> Jump 2 op distance (Drop)\n"
+		<< "Command >> '3'		>> Jump 3 op distance\n"
+		<< "Command >> '4'		>> Jump 4 op distance (Bank X)\n"
+		<< "Command >> '1s'		>> Jump 1 op distance (Use) with Sticky Keys enabled\n"
+		<< "Command >> '2s'		>> Jump 2 op distance (Drop) with Sticky Keys enabled\n"
+		<< "Command >> '3s'		>> Jump 3 op distance with Sticky Keys enabled\n"
+		<< "Command >> '4s'		>> Jump 4 op distance (Bank X) with Sticky Keys enabled\n"
+		<< "Command >> 'reset'	>> Load Defaults saved on program launch\n"
+		<< "Command >> 'clear'	>> Clear the console\n"
+		<< "Command >> 'manual'	>> Print this menu\n"
+		<< "Command >> 'faq'	>> Print the FAQ\n"
+		<< "Command >> 'exit'	>> Close the program\n"
+		<< std::endl;
 }
 void Program::CleanUp(void) {
 	delete mouseHandler;
