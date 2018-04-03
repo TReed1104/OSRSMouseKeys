@@ -38,6 +38,7 @@ public:
 	void PrintDisclaimer(void);
 	void PrintUI(void);
 	void PrintFAQ(void);
+	void ModeController(const int& mouseSpeed, const int mouseAcceleration[], const int& mouseKeyFlags, const int& mouseKeyJumpSpeed, const int& stickyKeyFlags);
 
 private:
 

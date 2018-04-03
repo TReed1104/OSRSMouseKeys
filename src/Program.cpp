@@ -55,6 +55,12 @@ void Program::PrintUI(void) {
 void Program::PrintFAQ(void) {
 	std::cout << "NOT YET IMPLEMENTED\n" << std::endl;
 }
+void Program::ModeController(const int& mouseSpeed, const int mouseAcceleration[], const int& mouseKeyFlags, const int& mouseKeyJumpSpeed, const int& stickyKeyFlags) {
+	mouseHandler->SetMousespeed(mouseSpeed);
+	mouseHandler->SetMouseAcceleration(mouseAcceleration[0], mouseAcceleration[1], mouseAcceleration[2]);
+	mouseKeyHandler->SetMouseKeys(mouseKeyFlags, mouseKeyJumpSpeed);
+	stickyKeyHandler->SetSettings(stickyKeyFlags);
+}
 void Program::CleanUp(void) {
 	delete mouseHandler;
 	delete mouseKeyHandler;
@@ -92,59 +98,35 @@ void Program::Run() {
 		}
 		else if (enteredCommand == "1") {
 			std::cout << "Active Mode - JUMP ONE\n" << std::endl;
-			mouseHandler->SetMousespeed(defaultMouseSpeed);
-			mouseHandler->SetMouseAcceleration(inUseMouseSettings[0], inUseMouseSettings[1], inUseMouseSettings[2]);
-			mouseKeyHandler->SetMouseKeys(defaultMouseKeyFlags, jumpOptionOne);
-			stickyKeyHandler->SetSettings(0);
+			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionOne, 0);
 		}
 		else if (enteredCommand == "2") {
 			std::cout << "Active Mode - JUMP TWO\n" << std::endl;
-			mouseHandler->SetMousespeed(defaultMouseSpeed);
-			mouseHandler->SetMouseAcceleration(inUseMouseSettings[0], inUseMouseSettings[1], inUseMouseSettings[2]);
-			mouseKeyHandler->SetMouseKeys(defaultMouseKeyFlags, jumpOptionTwo);
-			stickyKeyHandler->SetSettings(0);
+			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionTwo, 0);
 		}
 		else if (enteredCommand == "3") {
 			std::cout << "Active Mode - JUMP THREE\n" << std::endl;
-			mouseHandler->SetMousespeed(defaultMouseSpeed);
-			mouseHandler->SetMouseAcceleration(inUseMouseSettings[0], inUseMouseSettings[1], inUseMouseSettings[2]);
-			mouseKeyHandler->SetMouseKeys(defaultMouseKeyFlags, jumpOptionThree);
-			stickyKeyHandler->SetSettings(0);
+			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionThree, 0);
 		}
 		else if (enteredCommand == "4") {
 			std::cout << "Active Mode - JUMP FOUR\n" << std::endl;
-			mouseHandler->SetMousespeed(defaultMouseSpeed);
-			mouseHandler->SetMouseAcceleration(inUseMouseSettings[0], inUseMouseSettings[1], inUseMouseSettings[2]);
-			mouseKeyHandler->SetMouseKeys(defaultMouseKeyFlags, jumpOptionFour);
-			stickyKeyHandler->SetSettings(0);
+			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionFour, 0);
 		}
 		else if (enteredCommand == "1s") {
 			std::cout << "Active Mode - JUMP ONE WITH STICKY KEYS\n" << std::endl;
-			mouseHandler->SetMousespeed(defaultMouseSpeed);
-			mouseHandler->SetMouseAcceleration(inUseMouseSettings[0], inUseMouseSettings[1], inUseMouseSettings[2]);
-			mouseKeyHandler->SetMouseKeys(defaultMouseKeyFlags, jumpOptionOne);
-			stickyKeyHandler->SetSettings(defaultStickyKeyFlags);
+			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionOne, defaultStickyKeyFlags);
 		}
 		else if (enteredCommand == "2s") {
 			std::cout << "Active Mode - JUMP TWO WITH STICKY KEYS\n" << std::endl;
-			mouseHandler->SetMousespeed(defaultMouseSpeed);
-			mouseHandler->SetMouseAcceleration(inUseMouseSettings[0], inUseMouseSettings[1], inUseMouseSettings[2]);
-			mouseKeyHandler->SetMouseKeys(defaultMouseKeyFlags, jumpOptionTwo);
-			stickyKeyHandler->SetSettings(defaultStickyKeyFlags);
+			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionTwo, defaultStickyKeyFlags);
 		}
 		else if (enteredCommand == "3s") {
 			std::cout << "Active Mode - JUMP THREE WITH STICKY KEYS\n" << std::endl;
-			mouseHandler->SetMousespeed(defaultMouseSpeed);
-			mouseHandler->SetMouseAcceleration(inUseMouseSettings[0], inUseMouseSettings[1], inUseMouseSettings[2]);
-			mouseKeyHandler->SetMouseKeys(defaultMouseKeyFlags, jumpOptionThree);
-			stickyKeyHandler->SetSettings(defaultStickyKeyFlags);
+			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionThree, defaultStickyKeyFlags);
 		}
 		else if (enteredCommand == "4s") {
 			std::cout << "Active Mode - JUMP FOUR WITH STICKY KEYS\n" << std::endl;
-			mouseHandler->SetMousespeed(defaultMouseSpeed);
-			mouseHandler->SetMouseAcceleration(inUseMouseSettings[0], inUseMouseSettings[1], inUseMouseSettings[2]);
-			mouseKeyHandler->SetMouseKeys(defaultMouseKeyFlags, jumpOptionFour);
-			stickyKeyHandler->SetSettings(defaultStickyKeyFlags);
+			this->ModeController(defaultMouseSpeed, inUseMouseSettings, defaultMouseKeyFlags, jumpOptionFour, defaultStickyKeyFlags);
 		}
 		else {
 			std::cout << "Unknown input, pease try again.\n" << std::endl;
