@@ -21,7 +21,16 @@ Program::~Program() {
 }
 
 void Program::PrintDisclaimer(void) {
+	std::cout
+		<< "Teebu's Mouse Key control panel\n"
+		<< "A client for the quick setup of your Operating Systems Mouse Keys.\n\n"
 
+		<< "DISCLAIMER:\n"
+		<< "This project is an Open-Source client for the quick and easy toggling between the different\n"
+		<< "mouse key modes commonly used for Old School Runescape.\n"
+		<< "This program sets the Operating system's mouse key settings directly and therefore does not\n"
+		<< "break the rules set out by Jagex.\n"
+		<< std::endl;
 }
 void Program::PrintUI(void) {
 	// Draw the UI.
