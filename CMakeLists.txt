@@ -1,5 +1,5 @@
 # Set the project name
-project(OSRSMouseKeys)
+project(osrs-mousekey-cli)
 
 # Set the CMake version
 cmake_minimum_required(VERSION 3.0)
@@ -8,9 +8,9 @@ cmake_minimum_required(VERSION 3.0)
 file(GLOB header_files "src/*.h" "src/*.hpp")
 file(GLOB src_files "src/*.c" "src/*.cpp")
 
-ADD_EXECUTABLE(OSRSMouseKeys ${header_files} ${src_files})
+ADD_EXECUTABLE(osrs-mousekey-cli ${header_files} ${src_files})
 
 # Set the C++ version
 set (CMAKE_CXX_STANDARD 11)
 # Set the project for VS to use.
-set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "OSRSMouseKeys")
+set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "osrs-mousekey-cli")
